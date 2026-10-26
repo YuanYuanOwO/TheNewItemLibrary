@@ -85,12 +85,12 @@ public class PaperOldMaxDamageComponent extends MaxDamageComponent<PaperItemStac
   @Override
   public PaperItemStack serialize(final ItemStack item, final PaperItemStack serialized) {
 
-    if(item.hasItemMeta() && item.getItemMeta() instanceof final Damageable meta) {
+    if(item.hasItemMeta() && item.getItemMeta() instanceof final Damageable meta && meta.hasMaxDamage()) {
 
       this.maxDamage = meta.getMaxDamage();
+      serialized.applyComponent(this);
     }
 
-    serialized.applyComponent(this);
     return serialized;
   }
 

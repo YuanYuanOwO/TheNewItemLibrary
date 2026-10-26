@@ -87,11 +87,12 @@ public class PaperOldMaxStackSizeComponent extends MaxStackSizeComponent<PaperIt
   public PaperItemStack serialize(final ItemStack item, final PaperItemStack serialized) {
 
     final ItemMeta meta = item.getItemMeta();
-    if(meta != null) {
-
-      this.maxStackSize = meta.getMaxStackSize();
+    if(meta == null || !meta.hasMaxStackSize()) {
+      
+      return serialized;
     }
 
+    this.maxStackSize = meta.getMaxStackSize();
     serialized.applyComponent(this);
     return serialized;
   }
